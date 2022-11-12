@@ -25,6 +25,7 @@ class UsersRepository implements IUsersRepository {
       name,
       email,
       created_at: new Date(),
+      updated_at: new Date(),
     });
 
     this.users.push(user);
@@ -32,7 +33,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   findById(id: string): User | undefined {
-    const userId = this.users.find((user) => user.id === id)
+    const userId = this.users.find((user) => user.id === id);
     return userId;
   }
 
@@ -42,7 +43,12 @@ class UsersRepository implements IUsersRepository {
   }
 
   turnAdmin(receivedUser: User): User {
-    //
+    const userAlreadyAdmin = this.users.find((user) => user === receivedUser);
+
+    userAlreadyAdmin.admin = true;
+    userAlreadyAdmin.updated_at = new Date();
+
+    return userAlreadyAdmin;
   }
 
   list(): User[] {
