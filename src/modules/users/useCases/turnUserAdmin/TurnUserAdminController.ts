@@ -10,7 +10,7 @@ class TurnUserAdminController {
 
     try {
       const userAdmin = this.turnUserAdminUseCase.execute({ user_id });
-      return response.json(userAdmin);
+      return response.status(200).json(userAdmin);
     } catch (error) {
       return response.status(404).json({ error: error.message });
     }
